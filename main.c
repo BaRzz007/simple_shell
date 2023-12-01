@@ -2,7 +2,7 @@
 
 /**
  * main - Entry point to the shell program
- * 
+ *
  * Return: 0 if success, 1 on failure
  */
 int main(void)
@@ -12,6 +12,7 @@ int main(void)
 	size_t n;
 	char **cmd, *buf;
 
+	signal(SIGINT, handle_signal);
 	buf = NULL;
 	n = 0;
 	while (1)
@@ -39,8 +40,10 @@ int main(void)
 		/* Only execute this part in the child process */
 		else if (pid == 0)
 		{
-			/* parse command
-			cmd = tokenize(buf, " \t\n");*/
+			/**
+			 * parse command
+			 * cmd = tokenize(buf, " \t\n");
+			 */
 
 			exec_status = execve(cmd[0], cmd, environ);
 			if (exec_status == -1)

@@ -8,8 +8,13 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <string.h>
+#include <signal.h>
+
+#define TRUE 1
+#define FALSE 0
 
 char **tokenize(char *str, char *delim);
+void handle_signal(int);
 
 extern char **environ;
 

@@ -8,12 +8,13 @@
 int main(void)
 {
 	pid_t pid;
-	int status, exec_status;
+	int status, exec_status, count;
 	size_t n;
 	char **cmd, *buf;
 
 	buf = NULL;
 	n = 0;
+	count = 0
 	while (1)
 	{
 		signal(SIGINT, handle_signal);
@@ -30,7 +31,10 @@ int main(void)
 		/* Parse line and check command here */
 		cmd = tokenize(buf, " \t\n");
 		if (cmd[0] == NULL)
+		{
+			count++
 			continue;
+		}
 
 		/* Creates a new process */
 		pid = fork();
@@ -61,6 +65,7 @@ int main(void)
 			signal(SIGINT, handle_signal2);
 			waitpid(pid, &status, 0);
 		}
+		count++;
 	}
 	free(buf);
 	return (0);

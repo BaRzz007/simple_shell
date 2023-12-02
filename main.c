@@ -10,11 +10,11 @@ int main(void)
 	pid_t pid;
 	int status, exec_status, count;
 	size_t n;
-	char **cmd, *buf;
+	char **cmd, *buf, *full_path;
 
 	buf = NULL;
 	n = 0;
-	count = 0
+	count = 0;
 	while (1)
 	{
 		signal(SIGINT, handle_signal);
@@ -32,7 +32,7 @@ int main(void)
 		cmd = tokenize(buf, " \t\n");
 		if (cmd[0] == NULL)
 		{
-			count++
+			count++;
 			continue;
 		}
 
@@ -49,8 +49,12 @@ int main(void)
 		if (pid == 0)
 		{
 			/* cmd = tokenize(buf, " \t\n"); */
-
-			exec_status = execve(cmd[0], cmd, environ);
+			if ((full_path = in_path(cmd[0])))
+			{
+				exec_status = execve(full_path, cmd, environ);
+			}
+			else
+				exec_status = execve(cmd[0], cmd, environ);
 			if (exec_status == -1)
 			{
 				free(cmd);

@@ -15,6 +15,7 @@
 
 char **tokenize(char *str, char *delim);
 void handle_signal(int);
+void handle_signal2(int);
 
 extern char **environ;
 

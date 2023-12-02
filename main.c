@@ -12,11 +12,11 @@ int main(void)
 	size_t n;
 	char **cmd, *buf;
 
-	signal(SIGINT, handle_signal);
 	buf = NULL;
 	n = 0;
 	while (1)
 	{
+		signal(SIGINT, handle_signal);
 		/* Write prompt */
 		write(STDIN_FILENO, "Fizz=->> ", 9);
 
@@ -26,8 +26,11 @@ int main(void)
 			write(STDIN_FILENO, "\n", 1);
 			break;
 		}
+
 		/* Parse line and check command here */
 		cmd = tokenize(buf, " \t\n");
+		if (cmd[0] == NULL)
+			continue;
 
 		/* Creates a new process */
 		pid = fork();
@@ -37,13 +40,11 @@ int main(void)
 			perror("Failed to fork");
 			return (1);
 		}
+
 		/* Only execute this part in the child process */
-		else if (pid == 0)
+		if (pid == 0)
 		{
-			/**
-			 * parse command
-			 * cmd = tokenize(buf, " \t\n");
-			 */
+			/* cmd = tokenize(buf, " \t\n"); */
 
 			exec_status = execve(cmd[0], cmd, environ);
 			if (exec_status == -1)
@@ -56,7 +57,10 @@ int main(void)
 		}
 		/* Execute this part in the parent process which is the shell */
 		else
+		{
+			signal(SIGINT, handle_signal2);
 			waitpid(pid, &status, 0);
+		}
 	}
 	free(buf);
 	return (0);

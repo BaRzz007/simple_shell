@@ -11,10 +11,13 @@ int main(void)
 	int status, exec_status, count;
 	size_t n;
 	char **cmd, *buf, *full_path;
+	program data;
 
 	buf = NULL;
 	n = 0;
 	count = 0;
+	data.tokens = NULL;
+	data.command_name = NULL;
 	while (1)
 	{
 		signal(SIGINT, handle_signal);
@@ -35,7 +38,10 @@ int main(void)
 			count++;
 			continue;
 		}
-
+		if (_strcmp(cmd[0], "exit") == 0)
+		{
+			built_exit(&data);
+		}
 		/* Creates a new process */
 		pid = fork();
 		if (pid == -1)

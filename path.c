@@ -12,22 +12,24 @@ char *in_path(char *filename)
 	int i;
 	char *path, **token_arr, full_path[1024], *path_cpy, *ret_path;
 	struct stat statbuf;
-
-	/* This line returns a pointer to a string within the environment list
+	/*
+	 * This line returns a pointer to a string within the environment list
 	 * this string must not be modified by the caller
 	 */
 	path = getenv("PATH");
 	if (!path)
 		return (NULL);
 
-	/* This is why you should get a duplicate or a copy of the string */
+	/*
+	 * This is why you should get a duplicate or a copy of the string
+	 */
 	path_cpy = strdup(path);
 
 	token_arr = tokenize(path_cpy, ":");
 
 	full_path[0] = '\0';
 	i = 0;
-	while(token_arr[i])
+	while (token_arr[i])
 	{
 		strcpy(full_path, token_arr[i]);
 		strcat(full_path, "/");

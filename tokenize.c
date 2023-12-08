@@ -1,6 +1,6 @@
 #include "shell.h"
 
-/**
+/*
  * tokenize - Splits a string into an array of token
  * depending on the given delimeter
  * @str: string to be split
@@ -23,15 +23,16 @@ char **tokenize(char *str, char *delim)
 		token_arr[i] = token;
 		token = strtok(NULL, delim);
 	}
-
-	/* free up excess array space
-	if (i < 1024)
-	{
-		for (j = i + 1; j < 1024; j++)
-		{
-			free(token_arr[j]);
-		}
-	}*/
+	/*
+	 * free up excess array space
+	* if (i < 1024)
+	* {
+	*	for (j = i + 1; j < 1024; j++)
+	*	{
+	*		free(token_arr[j]);
+	*	}
+	}*
+	*/
 	free(token);
 	return (token_arr);
 }

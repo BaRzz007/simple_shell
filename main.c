@@ -12,6 +12,7 @@ int main(void)
 	size_t n;
 	char **cmd, *buf, *full_path;
 	program data;
+	int exit_int;
 
 	buf = NULL;
 	n = 0;
@@ -40,7 +41,8 @@ int main(void)
 		}
 		if (_strcmp(cmd[0], "exit") == 0)
 		{
-			built_exit(&data);
+			exit_int = 98;
+			built_exit(&data, exit_int);
 		}
 		/* Creates a new process */
 		pid = fork();

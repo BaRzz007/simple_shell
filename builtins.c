@@ -5,9 +5,9 @@
  * @data: member of struct for the program data
  * Return: 0 to exit the shell
  */
-int built_exit(program *data)
+int built_exit(program *data, int exit_int)
 {
 	free(data->tokens);
 	free(data->command_name);
-	exit(0);
+	exit(exit_int);
 }

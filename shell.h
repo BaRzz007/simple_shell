@@ -24,7 +24,7 @@ void handle_signal(int);
 void handle_signal2(int);
 char *in_path(char *);
 int _strcmp(const char *s1, const char *s2);
-int built_exit(program *data);
+int built_exit(program *data, int exit_int);
 
 extern char **environ;
 

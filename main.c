@@ -5,21 +5,22 @@
  *
  * Return: 0 if success, 1 on failure
  */
-int main(void)
+int main(int argc, char **argv)
 {
 	pid_t pid;
 	int status, exec_status, count;
 	size_t n;
-	char **cmd, *buf, *full_path;
+	char **cmd, *buf, *full_path, *prompt = "Fizz=->> ";
 
+	(void) argc;
 	buf = NULL;
 	n = 0;
-	count = 0;
+	count = 1;
 	while (1)
 	{
 		signal(SIGINT, handle_signal);
 		/* Write prompt */
-		write(STDIN_FILENO, "Fizz=->> ", 9);
+		write(STDIN_FILENO, prompt, 9);
 
 		/* Get command; if command is EOF, break */
 		if (getline(&buf, &n, stdin) == -1)
@@ -36,6 +37,17 @@ int main(void)
 			continue;
 		}
 
+		if (!(full_path = in_path(cmd[0])))
+		{
+			/** 
+			 * replace this line with a function that handles
+			 * printing out error messages
+			 */
+			printf("%s: %d: %s: not found\n", argv[0], count, cmd[0]);
+			count++;
+			continue;
+		}
+
 		/* Creates a new process */
 		pid = fork();
 		if (pid == -1)
@@ -48,19 +60,15 @@ int main(void)
 		/* Only execute this part in the child process */
 		if (pid == 0)
 		{
-			/* cmd = tokenize(buf, " \t\n"); */
-			if ((full_path = in_path(cmd[0])))
-			{
-				exec_status = execve(full_path, cmd, environ);
-			}
-			else
-				exec_status = execve(cmd[0], cmd, environ);
+			exec_status = execve(full_path, cmd, environ);
 			if (exec_status == -1)
 			{
+				free(full_path);
 				free(cmd);
 				perror("execve");
 				return (1);
 			}
+			free(full_path);
 			free(cmd);
 		}
 		/* Execute this part in the parent process which is the shell */
@@ -71,6 +79,7 @@ int main(void)
 		}
 		count++;
 	}
+	free(full_path);
 	free(buf);
 	return (0);
 }

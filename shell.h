@@ -26,6 +26,14 @@ char *in_path(char *);
 int _strcmp(const char *s1, const char *s2);
 int built_exit(program *data, int exit_int);
 
+void setup_shell(char **buf, size_t *n);
+int handle_input(char **buf, size_t *n, program *data, int *count, int *exit_int);
+pid_t create_process(char ***cmd);
+void process_input(char *buf, program *data, int *count);
+void execute_process(pid_t pid, int *status, char **cmd);
+void free_and_error(char **cmd, const char *error_message);
+void execute_child_process(char ***cmd, char **full_path);
+
 extern char **environ;
 
 #endif

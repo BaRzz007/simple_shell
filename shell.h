@@ -14,7 +14,17 @@
 #define TRUE 1
 #define FALSE 0
 
-typedef struct program{
+/**
+ * struct program - it stores basic information of the program
+ * @tokens: store the tokens gotten from the user input
+ * @command_name: the first token retrieved
+ *
+ * Description: This struct handles a program
+ * by storing valuable information like the
+ * tokens and command_name
+ */
+typedef struct program
+{
 	char **tokens;
 	char *command_name;
 } program;
@@ -27,7 +37,7 @@ int _strcmp(const char *s1, const char *s2);
 int built_exit(program *data, int exit_int);
 
 void setup_shell(char **buf, size_t *n);
-int handle_input(char **buf, size_t *n, program *data, int *count, int *exit_int);
+int handle_input(char **, size_t *, program *, int *, int *);
 pid_t create_process(char ***cmd);
 void process_input(char *buf, program *data, int *count);
 void execute_process(pid_t pid, int *status, char **cmd);

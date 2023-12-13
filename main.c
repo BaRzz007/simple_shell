@@ -15,7 +15,7 @@ int main(void)
 	buf = NULL;
 	count = 0;
 	n = 0;
-	data.tokens =NULL;
+	data.tokens = NULL;
 	data.command_name = NULL;
 	while (1)
 	{

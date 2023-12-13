@@ -1,9 +1,12 @@
 #include "shell.h"
 
-/*
- *
- *
- *
+/**
+ * process_input - this function handles
+ * the input gotten from the commandline
+ * @buf: it is a container holding the input entered by the  user
+ * @data: holds informationfor further processing
+ * @count: counter for keeping track the
+ * of the program
  */
 void process_input(char *buf, program *data, int *count)
 {
@@ -33,9 +36,10 @@ void process_input(char *buf, program *data, int *count)
 	(*count)++;
 }
 
-/*
- *
- *
+/**
+ * create_process - responsible of stating a process
+ * @cmd: pointer to the pointer of cmd, which holds the tokenied input
+ * Return: pid when successful
  */
 pid_t create_process(char ***cmd)
 {
@@ -47,13 +51,16 @@ pid_t create_process(char ***cmd)
 	{
 		execute_child_process(cmd, &full_path);
 	}
-	return( pid);
+	return (pid);
 }
 
-/*
- *
- *
- *
+/**
+ * execute_process - incharge of excuting the command and stating a
+ * new process when found
+ * @pid: process id of the current process
+ * @status: staus of the process
+ * @cmd: pointer to commandline tokenized
+ * string
  */
 void execute_process(pid_t pid, int *status, char **cmd)
 {

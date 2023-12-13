@@ -12,6 +12,11 @@ void handle_signal(int signum)
 		write(1, "\nFizz=->> ", 10);
 }
 
+/**
+ * handle_signal2 - for multiline
+ * @signum: signal number
+ * Return: 0
+ */
 void handle_signal2(int signum)
 {
 	if (signum == SIGINT)

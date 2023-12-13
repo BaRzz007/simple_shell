@@ -1,6 +1,6 @@
 #include "shell.h"
 
-/*
+/**
  * tokenize - Splits a string into an array of token
  * depending on the given delimeter
  * @str: string to be split

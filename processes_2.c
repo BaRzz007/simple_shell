@@ -1,15 +1,18 @@
 #include "shell.h"
 
-/*
- *
- *
- *
+/**
+ * execute_child_process - in the child process
+ * it executes the command when it is
+ * an executable
+ * @cmd: a pointer to a pointer of the tokenized input
+ * @full_path: pointer to the command full path
  */
 void execute_child_process(char ***cmd, char **full_path)
 {
 	int exec_status;
 
-	if ((*full_path = in_path((*cmd)[0])))
+	*full_path = in_path((*cmd)[0]);
+	if (*full_path)
 	{
 		exec_status = execve(*full_path, *cmd, environ);
 	}
@@ -25,10 +28,10 @@ void execute_child_process(char ***cmd, char **full_path)
 	free(*cmd);
 }
 
-/*
- *
- *
- *
+/**
+ * free_and_error - handles errors
+ * @cmd: holds tokenized strings
+ * @error_message: constant error message for handing errors
  */
 void free_and_error(char **cmd, const char *error_message)
 {

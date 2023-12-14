@@ -23,15 +23,16 @@ char **tokenize(char *str, char *delim)
 		token_arr[i] = token;
 		token = strtok(NULL, delim);
 	}
-
-	/* free up excess array space
-	if (i < 1024)
-	{
-		for (j = i + 1; j < 1024; j++)
-		{
-			free(token_arr[j]);
-		}
-	}*/
+	/*
+	 * free up excess array space
+	* if (i < 1024)
+	* {
+	*	for (j = i + 1; j < 1024; j++)
+	*	{
+	*		free(token_arr[j]);
+	*	}
+	}*
+	*/
 	free(token);
 	return (token_arr);
 }

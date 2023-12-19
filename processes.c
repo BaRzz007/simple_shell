@@ -26,14 +26,21 @@ void process_input(char *buf, program *data, int *count)
 		exit_int = 98;
 		built_exit(data, exit_int);
 	}
-	pid = create_process(&cmd);
-	if (pid == -1)
+	else if (_strcmp(cmd[0], "cd") == 0)
 	{
-		free_and_error(cmd, "Failed to fork");
-		exit(1);
+		built_cd(cmd);
 	}
-	execute_process(pid, status, cmd);
-	(*count)++;
+	else
+	{
+		pid = create_process(&cmd);
+		if (pid == -1)
+		{
+			free_and_error(cmd, "Failed to fork");
+			exit(1);
+		}
+		execute_process(pid, status, cmd);
+		(*count)++;
+	}
 }
 
 /**

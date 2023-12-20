@@ -7,8 +7,9 @@
  * @data: holds informationfor further processing
  * @count: counter for keeping track the
  * of the program
+ * @num: tracking number of dir
  */
-void process_input(char *buf, program *data, int *count)
+void process_input(char *buf, program *data, int *count, size_t *num)
 {
 	char **cmd;
 	int *status, exit_int;
@@ -28,7 +29,7 @@ void process_input(char *buf, program *data, int *count)
 	}
 	else if (_strcmp(cmd[0], "cd") == 0)
 	{
-		built_cd(cmd);
+		built_cd(cmd, num);
 	}
 	else
 	{

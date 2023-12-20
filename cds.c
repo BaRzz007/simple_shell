@@ -62,10 +62,6 @@ void handle_dir(char *target, char *pre, cds *cd)
 			perror("memory full");
 		}
 	}
-	for (i = 0; i < *(cd->num); ++i)
-	{
-		printf("previous_dir array %s\n", cd->previous_dir[i]);
-	}
 }
 
 /**
@@ -75,7 +71,12 @@ void handle_dir(char *target, char *pre, cds *cd)
  */
 void handle_dir_back(char *pre, cds *cd)
 {
-	if (pre != NULL && cd->previous_dir[1] != NULL)
+	size_t b, t;
+	char *pat, *i;
+
+	b = *(cd->num);
+	t = 0;
+	if (pre != NULL && b > t)
 	{
 		if (chdir(cd->previous_dir[--(*(cd->num))]) == -1)
 		{
@@ -90,14 +91,18 @@ void handle_dir_back(char *pre, cds *cd)
 	}
 	else
 	{
+		pat = obtain_cpwd();
 		if (chdir(getenv("HOME")))
 		{
 			perror("getenv");
 		}
 		else
 		{
+			i = obtain_cpwd();
+			cd->previous_dir[--(*(cd->num))] = strdup(i);
 			++(*(cd->num));
-			free(cd->previous_dir[--(*(cd->num))]);
+			cd->previous_dir[*(cd->num)] = strdup(pat);
+			++(*(cd->num));
 		}
 	}
 }

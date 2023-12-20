@@ -64,9 +64,9 @@ void update_old(char *oldpwd);
 char *obtain_cpwd();
 void built_cd(char **cmd, cds *cd);
 void handle_dir(char *target, char *pre, cds *cd);
-void handle_dir_back( char *pre, cds *cd);
+void handle_dir_back(char *pre, cds *cd);
 int _setenv(const char *, const char *, int);
-cds init();
+cds init(void);
 
 extern char **environ;
 

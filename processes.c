@@ -7,7 +7,7 @@
  * @data: holds informationfor further processing
  * @count: counter for keeping track the
  * of the program
- * @num: tracking number of dir
+ * @cd: tracking number of dir
  */
 void process_input(char *buf, program *data, int *count, cds *cd)
 {

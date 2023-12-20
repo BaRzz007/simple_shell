@@ -1,11 +1,10 @@
 #include "shell.h"
+
 /**
- *
- *
- *
- *
+ * init - for initializing builtins
+ * Return: the struct holding initializing info
  */
-cds init()
+cds init(void)
 {
 	cds cd;
 
@@ -21,5 +20,5 @@ cds init()
 
 	}
 	*(cd.num) = 0;
-	return cd;
+	return (cd);
 }

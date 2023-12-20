@@ -13,18 +13,13 @@ int main(void)
 	int count;
 	program data;
 	cds can;
-/*	cds cd;
 
-	cd.num = malloc(sizeof(size_t));*/
 	can = init();
 	buf = NULL;
 	count = 0;
 	n = 0;
 	data.tokens = NULL;
 	data.command_name = NULL;
-/*	if (cd.num == NULL)
-		return (1);
-	*(cd.num) = 0;*/
 	while (1)
 	{
 		signal(SIGINT, handle_signal);

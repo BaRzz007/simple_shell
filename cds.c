@@ -16,25 +16,26 @@ char *obtain_cpwd()
  * @num: to keep track of the number of dirs
  * @cmd: pointer to cmd
  */
-void built_cd(char **cmd, size_t *num)
+void built_cd(char **cmd, cds *cd)
 {
 	char *pre_dir, *target_dir;
-	cds cd;
+/*	cds cd;
 	
 	pre_dir = obtain_cpwd();
 	cd.previous_dir = malloc(sizeof(char *) * 20);
 	if (cd.previous_dir == NULL)
 	{
 		perror("memory fail");
-	}
+	}*/
+	pre_dir = obtain_cpwd();
 	target_dir = (cmd[1] != NULL) ? cmd[1] : getenv("HOME");
 	if (_strcmp(target_dir, "-") != 0)
 	{
-		handle_dir(num, target_dir, pre_dir, &cd);
+		handle_dir(target_dir, pre_dir, cd);
 	}
 	else if (cmd[1] && _strcmp(target_dir, "-") == 0)
 	{
-		handle_dir_back(num, target_dir, &cd);
+		handle_dir_back(target_dir, cd);
 	}
 	else
 	{
@@ -49,7 +50,7 @@ void built_cd(char **cmd, size_t *num)
  * @pre: previous dir
  * @previous_dir: array of previous_dir
  */
-void handle_dir(size_t *num, char *target, char *pre, cds *cd)
+void handle_dir(char *target, char *pre, cds *cd)
 {
 	size_t i;
 	if (chdir(target)  == -1)
@@ -58,19 +59,19 @@ void handle_dir(size_t *num, char *target, char *pre, cds *cd)
 	}
 	else
 	{
-		cd->previous_dir[*num] = strdup(pre);
-		printf("num is %ld pre is now %s\n", *num, cd->previous_dir[*num]);
-		if (cd->previous_dir[*num] != NULL)
+		cd->previous_dir[*(cd->num)] = strdup(pre);
+		printf("num is %ld pre is now %s\n", *(cd->num), cd->previous_dir[*(cd->num)]);
+		if (cd->previous_dir[*(cd->num)] != NULL)
 		{
-			++(*num);
-			printf("num increased to %ld\n", *num);
+			++(*(cd->num));
+			printf("num increased to %ld\n", *(cd->num));
 		}
 		else
 		{
 			perror("memory full");
 		}
 	}
-	for (i = 0; i < *num; ++i)
+	for (i = 0; i < *(cd->num); ++i)
 	{
 		printf("previous_dir array %s\n", cd->previous_dir[i]);
 	}
@@ -82,22 +83,24 @@ void handle_dir(size_t *num, char *target, char *pre, cds *cd)
  * @pre: previous dir
  * @previous_dir: array of previous_dir
  */
-void handle_dir_back(size_t *num, char *pre, cds *cd)
+void handle_dir_back(char *pre, cds *cd)
 {
-	if (pre != NULL)
+	if (pre != NULL && cd->previous_dir[1] != NULL)
 	{
-		if (chdir(cd->previous_dir[--(*num)]) == -1)
+		if (chdir(cd->previous_dir[--(*(cd->num))]) == -1)
 		{
 			printf("previous_dir is %s\n", cd->previous_dir[0]);
 		/*	perror("chdir");*/
 		}
 		else
 		{
-			_setenv("PWD", cd->previous_dir[*num], 1);
+			free(cd->previous_dir[++(*(cd->num))]);
+					--(*(cd->num));
+			_setenv("PWD", cd->previous_dir[*(cd->num)], 1);
 		}
 	}
 	else
 	{
-		perror("cd");
+		perror("chdir");
 	}
 }

@@ -9,7 +9,7 @@
  * of the program
  * @num: tracking number of dir
  */
-void process_input(char *buf, program *data, int *count, size_t *num)
+void process_input(char *buf, program *data, int *count, cds *cd)
 {
 	char **cmd;
 	int *status, exit_int;
@@ -29,7 +29,7 @@ void process_input(char *buf, program *data, int *count, size_t *num)
 	}
 	else if (_strcmp(cmd[0], "cd") == 0)
 	{
-		built_cd(cmd, num);
+		built_cd(cmd, cd);
 	}
 	else
 	{

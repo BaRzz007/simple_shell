@@ -53,7 +53,7 @@ int built_exit(program *data, int exit_int);
 void setup_shell(char **buf, size_t *n);
 int handle_input(char **, size_t *, program *, int *, int *);
 pid_t create_process(char ***cmd);
-void process_input(char *buf, program *data, int *count, size_t  *num);
+void process_input(char *buf, program *data, int *count, cds *cd);
 void execute_process(pid_t pid, int *status, char **cmd);
 void free_and_error(char **cmd, const char *error_message);
 void execute_child_process(char ***cmd, char **full_path);
@@ -62,10 +62,11 @@ void execute_child_process(char ***cmd, char **full_path);
 void update_pwd(char *new_pwd);
 void update_old(char *oldpwd);
 char *obtain_cpwd();
-void built_cd(char **cmd, size_t *num);
-void handle_dir(size_t *num, char *target, char *pre, cds *cd);
-void handle_dir_back(size_t *num, char *pre, cds *cd);
+void built_cd(char **cmd, cds *cd);
+void handle_dir(char *target, char *pre, cds *cd);
+void handle_dir_back( char *pre, cds *cd);
 int _setenv(const char *, const char *, int);
+cds init();
 
 extern char **environ;
 

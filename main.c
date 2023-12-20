@@ -12,17 +12,19 @@ int main(void)
 	char *buf;
 	int count;
 	program data;
-	cds cd;
+	cds can;
+/*	cds cd;
 
-	cd.num = malloc(sizeof(size_t));
+	cd.num = malloc(sizeof(size_t));*/
+	can = init();
 	buf = NULL;
 	count = 0;
 	n = 0;
 	data.tokens = NULL;
 	data.command_name = NULL;
-	if (cd.num == NULL)
+/*	if (cd.num == NULL)
 		return (1);
-	*(cd.num) = 0;
+	*(cd.num) = 0;*/
 	while (1)
 	{
 		signal(SIGINT, handle_signal);
@@ -32,7 +34,7 @@ int main(void)
 			write(STDIN_FILENO, "\n", 1);
 			break;
 		}
-		process_input(buf, &data, &count, cd.num);
+		process_input(buf, &data, &count, &can);
 	}
 	free(buf);
 	return (0);

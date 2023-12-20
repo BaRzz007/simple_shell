@@ -44,8 +44,6 @@ void built_cd(char **cmd, cds *cd)
  */
 void handle_dir(char *target, char *pre, cds *cd)
 {
-	size_t i;
-
 	if (chdir(target)  == -1)
 	{
 		perror("cd");

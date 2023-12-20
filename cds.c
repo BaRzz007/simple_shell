@@ -25,7 +25,6 @@ void built_cd(char **cmd, size_t *num)
 	cd.previous_dir = malloc(sizeof(char *) * 20);
 	if (cd.previous_dir == NULL)
 	{
-		free(num);
 		perror("memory fail");
 	}
 	target_dir = (cmd[1] != NULL) ? cmd[1] : getenv("HOME");
@@ -52,6 +51,7 @@ void built_cd(char **cmd, size_t *num)
  */
 void handle_dir(size_t *num, char *target, char *pre, cds *cd)
 {
+	size_t i;
 	if (chdir(target)  == -1)
 	{
 		perror("cd");
@@ -70,6 +70,10 @@ void handle_dir(size_t *num, char *target, char *pre, cds *cd)
 			perror("memory full");
 		}
 	}
+	for (i = 0; i < *num; ++i)
+	{
+		printf("previous_dir array %s\n", cd->previous_dir[i]);
+	}
 }
 
 /**
@@ -82,7 +86,7 @@ void handle_dir_back(size_t *num, char *pre, cds *cd)
 {
 	if (pre != NULL)
 	{
-		if (chdir(cd->previous_dir[0]) == -1)
+		if (chdir(cd->previous_dir[--(*num)]) == -1)
 		{
 			printf("previous_dir is %s\n", cd->previous_dir[0]);
 		/*	perror("chdir");*/

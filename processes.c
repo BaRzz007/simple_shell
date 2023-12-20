@@ -24,7 +24,7 @@ void process_input(char *buf, program *data, int *count, cds *cd)
 	}
 	if (_strcmp(cmd[0], "exit") == 0)
 	{
-		exit_int = 98;
+		exit_int = 232;
 		built_exit(data, exit_int);
 	}
 	else if (_strcmp(cmd[0], "cd") == 0)

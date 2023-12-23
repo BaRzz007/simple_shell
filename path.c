@@ -33,7 +33,7 @@ char *in_path(char *filename)
 	{
 		strcpy(full_path, token_arr[i]);
 		strcat(full_path, "/");
-		strcat(full_path, filename);
+		str_strcat(full_path, filename);
 		if (stat(full_path, &statbuf) == 0)
 		{
 			ret_path = NULL;

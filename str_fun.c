@@ -69,15 +69,21 @@ char *str_strcpy(char *str2, char *str)
 char *str_strcat(char *str2, char *str1)
 {
 	int i, j;
-
-	i = 0, j = 0;
-	for (; *str2 != '\0'; i++)
+	
+	for (i = 0; str2[i] != '\0'; i++)
+	{
 		;
-	for (; *str1 != '\0'; j++)
+	}
+	for (j = 0; i >= 0; )
 	{
 		str2[i] = str1[j];
 		j++;
+		i++;
+		if (str1[j] == '\0')
+		{
+			str2[i] = '\0';
+			break;
+		}
 	}
-	str2[j] = '\0';
 	return (str2);
 }

@@ -37,7 +37,7 @@ char *in_path(char *filename)
 		if (stat(full_path, &statbuf) == 0)
 		{
 			ret_path = NULL;
-			ret_path = strdup(full_path);
+			ret_path = str_strdup(full_path);
 			return (ret_path);
 		}
 		i++;

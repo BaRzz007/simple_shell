@@ -5,18 +5,18 @@
  * @str: pointer to the string
  * Return:a pointer to  the duplicated string
  */
-char *str_strdup(const char *str)
+char *str_strdup(char *str)
 {
-	char str2;
+	char *str2;
 	size_t strL;
 
-	if (!(str))
+	if (!str)
 		return (NULL);
-	strL = _strlen(str);
+	strL = str_strlen(str);
 	str2 = (char *)malloc(strL + 1);
 	if (str2 == NULL)
 		return (NULL);
-	_strcpy(str2, str);
+	str_strcpy(str2, str);
 	return (str2);
 }
 
@@ -25,9 +25,9 @@ char *str_strdup(const char *str)
  * @str: string to determine the length
  * Return: the length of the string
  */
-int str_strlen(char *str)
+size_t str_strlen(char *str)
 {
-	int count;
+	size_t count;
 	char *pointer;
 
 	count = 0;
@@ -46,11 +46,12 @@ int str_strlen(char *str)
  * @str: string to copy
  * Return: a pointer to str2
  */
-char *str_strcpy(char *str2, const char *str)
+char *str_strcpy(char *str2, char *str)
 {
 	int count;
 
-	while (str[i] == '\0')
+	count = 0;
+	while (str[count] != '\0')
 	{
 		str2[count] = str[count];
 		count++;
@@ -65,14 +66,14 @@ char *str_strcpy(char *str2, const char *str)
  * @str1: string to be concatenated
  * Return: a pointer to str2
  */
-char *str_strcat(char *str2, const char *str1)
+char *str_strcat(char *str2, char *str1)
 {
 	int i, j;
 
 	i = 0, j = 0;
-	for (; str2 != '\0'; i++)
+	for (; *str2 != '\0'; i++)
 		;
-	for (; str1 != '\0'; j++)
+	for (; *str1 != '\0'; j++)
 	{
 		str2[i] = str1[j];
 		j++;

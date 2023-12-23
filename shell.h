@@ -58,7 +58,9 @@ void execute_process(pid_t pid, int *status, char **cmd);
 void free_and_error(char **cmd, const char *error_message);
 void execute_child_process(char ***cmd, char **full_path);
 
-
+/*
+ * ************mostly cd prototype ****
+ */
 void update_pwd(char *new_pwd);
 void update_old(char *oldpwd);
 char *obtain_cpwd();
@@ -67,6 +69,17 @@ void handle_dir(char *target, char *pre, cds *cd);
 void handle_dir_back(char *pre, cds *cd);
 int _setenv(const char *, const char *, int);
 cds init(void);
+/**
+ ***********str_fun.c****************
+ */
+char *str_strcat(char *str2, char *str1);
+char *str_strcpy(char *str2, char *str);
+size_t str_strlen(char *str);
+char *str_strdup(char *str);
+/*
+ * ********end************
+ */
+char *env_getenv(char *name);
 
 extern char **environ;
 

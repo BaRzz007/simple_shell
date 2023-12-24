@@ -69,7 +69,7 @@ char *str_strcpy(char *str2, char *str)
 char *str_strcat(char *str2, char *str1)
 {
 	int i, j;
-	
+
 	for (i = 0; str2[i] != '\0'; i++)
 	{
 		;
@@ -86,4 +86,29 @@ char *str_strcat(char *str2, char *str1)
 		}
 	}
 	return (str2);
+}
+
+/**
+ * str_strncmp - compare a give number of string
+ * @str1: first string to compare
+ * @str2: second comparing string
+ * @m: number of charcters to compare
+ * Return: int 0 if equall, 1 if str1 > str2
+ * -1 otherwise
+ */
+int str_strncmp(char *str1, char *str2, int m)
+{
+	int i, j;
+
+	j = 0;
+	for (i = 0; i < m; i++)
+	{
+		if (str1[i] == str2[i])
+			j = 0;
+		else if (str1[i] > str2[i])
+			j = 1;
+		else
+			j = -1;
+	}
+	return (j);
 }

@@ -69,13 +69,14 @@ void handle_dir(char *target, char *pre, cds *cd);
 void handle_dir_back(char *pre, cds *cd);
 int _setenv(const char *, const char *, int);
 cds init(void);
-/**
+/*
  ***********str_fun.c****************
  */
 char *str_strcat(char *str2, char *str1);
 char *str_strcpy(char *str2, char *str);
 size_t str_strlen(char *str);
 char *str_strdup(char *str);
+int str_strncmp(char *str1, char *str2, int m);
 /*
  * ********end************
  */

@@ -16,14 +16,14 @@ char *in_path(char *filename)
 	 * This line returns a pointer to a string within the environment list
 	 * this string must not be modified by the caller
 	 */
-	path = getenv("PATH");
+	path = env_getenv("PATH");
 	if (!path)
 		return (NULL);
 
 	/*
 	 * This is why you should get a duplicate or a copy of the string
 	 */
-	path_cpy = strdup(path);
+	path_cpy = str_strdup(path);
 
 	token_arr = tokenize(path_cpy, ":");
 
@@ -31,8 +31,8 @@ char *in_path(char *filename)
 	i = 0;
 	while (token_arr[i])
 	{
-		strcpy(full_path, token_arr[i]);
-		strcat(full_path, "/");
+		str_strcpy(full_path, token_arr[i]);
+		str_strcat(full_path, "/");
 		str_strcat(full_path, filename);
 		if (stat(full_path, &statbuf) == 0)
 		{

@@ -10,13 +10,15 @@
 char *env_getenv(char *name)
 {
 	char **envir;
+	int tean;
 
 	envir = environ;
 	if (name == NULL)
 		return (NULL);
-	while (envir == NULL)
+	while (envir != NULL)
 	{
-		if (_strcmp(*envir, name) == 0 && (*envir)[str_strlen(name)] == '=')
+		tean = str_strncmp(*envir, name, str_strlen(name));
+		if (tean == 0 && (*envir)[str_strlen(name)] == '=')
 		{
 			return (*envir + str_strlen(name + 1));
 		}

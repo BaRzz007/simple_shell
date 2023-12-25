@@ -20,7 +20,7 @@ char *env_getenv(char *name)
 		tean = str_strncmp(*envir, name, str_strlen(name));
 		if (tean == 0 && (*envir)[str_strlen(name)] == '=')
 		{
-			return (*envir + str_strlen(name + 1));
+			return (*envir + str_strlen(name) + 1);
 		}
 		++envir;
 	}

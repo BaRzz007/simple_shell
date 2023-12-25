@@ -21,7 +21,7 @@ void built_cd(char **cmd, cds *cd)
 	char *pre_dir, *target_dir;
 
 	pre_dir = obtain_cpwd();
-	target_dir = (cmd[1] != NULL) ? cmd[1] : getenv("HOME");
+	target_dir = (cmd[1] != NULL) ? cmd[1] : env_getenv("HOME");
 	if (_strcmp(target_dir, "-") != 0)
 	{
 		handle_dir(target_dir, pre_dir, cd);
@@ -84,13 +84,12 @@ void handle_dir_back(char *pre, cds *cd)
 		{
 			free(cd->previous_dir[++(*(cd->num))]);
 					--(*(cd->num));
-			_setenv("PWD", cd->previous_dir[*(cd->num)], 1);
 		}
 	}
 	else
 	{
 		pat = obtain_cpwd();
-		if (chdir(getenv("HOME")))
+		if (chdir(env_getenv("HOME")))
 		{
 			perror("getenv");
 		}
